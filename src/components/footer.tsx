@@ -9,7 +9,7 @@ export default function SiteFooter (){
     return (
         <footer className='pb-8 pt-8 w-screen px-4 mt-auto bottom-0'>
             <div className='
-                  container max-w-7xl text-neutral-500
+                  container max-w-[1400px] text-neutral-500
                   flex flex-col sm:flex-row justify-between md:items-center
                   font-normal gap-4 sm:gap-0
                 '

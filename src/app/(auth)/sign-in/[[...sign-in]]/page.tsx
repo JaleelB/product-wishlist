@@ -4,6 +4,7 @@ export default function Page() {
   return (
     <SignIn
         path="/sign-in"
+        redirectUrl="/home"
         appearance={{
             elements: {
                 card: "shadow-none",

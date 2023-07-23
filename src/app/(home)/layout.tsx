@@ -23,7 +23,7 @@ export default function HomeLayout({
                         <Icons.twitter className="h-5 w-5"/>
                     </div>
                 </Link>
-                <Link href="/signin">
+                <Link href="/sign-in">
                     <Button className="ml-3 px-6 rounded-full">Sign In</Button>
                 </Link>
             </div>

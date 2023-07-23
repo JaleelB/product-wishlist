@@ -1,6 +1,16 @@
 import { type SVGProps } from "react";
+import {
+    ChevronLeft,
+    ChevronRight,
+    Loader2,
+    HashIcon,
+  } from "lucide-react"
 
 export const Icons = {
+    spinner: Loader2,
+    chevronLeft: ChevronLeft,
+    chevronRight: ChevronRight,
+    hash: HashIcon,
     logo: ({..._props}: SVGProps<SVGSVGElement>)  => (
         <svg {..._props} viewBox="0 0 83 19" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.67186 9.97421C2.13499 7.56916 2.36699 6.36842 3.13198 5.59358C3.27336 5.45082 3.42629 5.3209 3.58908 5.20526C4.47136 4.57895 5.65292 4.57895 8.01603 4.57895H9.48478C11.847 4.57895 13.0277 4.57895 13.9091 5.20526C14.073 5.32158 14.2257 5.45221 14.3662 5.59448C15.1321 6.36842 15.3641 7.57005 15.8272 9.97332C16.4922 13.4234 16.8251 15.1485 16.0592 16.3707C15.9212 16.5926 15.7591 16.7975 15.5763 16.9818C14.5706 18 12.8759 18 9.48478 18H8.01603C4.62402 18 2.92844 18 1.92283 16.9818C1.74088 16.7972 1.57919 16.5922 1.44072 16.3707C0.674864 15.1485 1.00777 13.4234 1.67358 9.97332L1.67186 9.97421Z" stroke="black" stroke-width="1.33"/>

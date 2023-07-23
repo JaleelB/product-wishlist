@@ -4,9 +4,13 @@ import {
     ChevronRight,
     Loader2,
     HashIcon,
+    HomeIcon,
+    ListIcon
   } from "lucide-react"
 
 export const Icons = {
+    home: HomeIcon,
+    list: ListIcon,
     spinner: Loader2,
     chevronLeft: ChevronLeft,
     chevronRight: ChevronRight,

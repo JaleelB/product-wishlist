@@ -10,27 +10,26 @@ datasource db {
 }
 
 model User {
-  id         Int         @id @default(autoincrement())
+  id         String         @id
   email      String      @unique
-  password   String
-  name       String?
+  name       String
   wishlists  Wishlist[]
 }
 
 model Wishlist {
-  id         Int         @id @default(autoincrement())
+  id         String         @id @default(uuid())
   title      String
-  userId     Int
+  userId     String
   user       User        @relation(fields: [userId], references: [id])
   products   Product[]
 }
 
 model Product {
-  id          Int         @id @default(autoincrement())
+  id          String         @id
   name        String
   url         String
   imageUrl    String?
   description String?
-  wishlistId  Int
+  wishlistId  String
   wishlist    Wishlist    @relation(fields: [wishlistId], references: [id])
 }

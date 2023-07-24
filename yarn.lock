@@ -617,6 +617,11 @@
     "@types/mime" "*"
     "@types/node" "*"
 
+"@types/uuid4@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/uuid4/-/uuid4-2.0.0.tgz#40a5376b7cbfde4f905403ab0e10d32b81aff341"
+  integrity sha512-lIeYnpveYni+lqo9X10IuFI11n/3l6RjxQvlVXVcijLp/w3jj+1CGX/dRIRJVtbO5ta6xYA9Xd3QqWGwUMvvng==
+
 "@typescript-eslint/eslint-plugin@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-6.0.0.tgz#19ff4f1cab8d6f8c2c1825150f7a840bc5d9bdc4"
@@ -3232,6 +3237,11 @@ util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+uuid4@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/uuid4/-/uuid4-2.0.3.tgz#241e5dfe1704a79c52e2aa40e7e581a5e7b01ab4"
+  integrity sha512-CTpAkEVXMNJl2ojgtpLXHgz23dh8z81u6/HEPiQFOvBc/c2pde6TVHmH4uwY0d/GLF3tb7+VDAj4+2eJaQSdZQ==
 
 watchpack@2.4.0:
   version "2.4.0"

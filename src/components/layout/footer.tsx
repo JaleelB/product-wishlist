@@ -7,7 +7,7 @@ export default function SiteFooter (){
     const year = d.getFullYear();
 
     return (
-        <footer className='pb-8 pt-8 w-screen px-4 mt-auto bottom-0'>
+        <footer className='pb-8 pt-8 w-screen mt-auto bottom-0'>
             <div className='
                   container max-w-[1400px] text-neutral-500
                   flex flex-col sm:flex-row justify-between md:items-center

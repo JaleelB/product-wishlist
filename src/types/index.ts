@@ -5,3 +5,9 @@ export interface NavItem {
     href: string
     icon?: LucideIcon
 }
+
+export interface AuthUser {
+    id: string
+    username: string
+    email: string
+}

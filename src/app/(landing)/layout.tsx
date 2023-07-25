@@ -1,6 +1,6 @@
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/ui/icons";
 import Link from "next/link";
 import MainNav from "@/components/layout/main-nav";
 

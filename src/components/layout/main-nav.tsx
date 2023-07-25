@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import { Icons } from '../icons';
+import { Icons } from '../ui/icons';
 import { useUser } from '@clerk/nextjs';
 
 export default  function MainNav({children}: {children: React.ReactNode}) {

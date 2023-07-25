@@ -1,6 +1,7 @@
 "use client"
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import { Icons } from "./ui/icons";
 
 export default function DashboardHeader({
     title,
@@ -36,9 +37,10 @@ export default function DashboardHeader({
                     <p className="text-muted-foreground text-sm sm:text-base max-w-md">{description}</p>
                 </div>
                 <Button 
-                    className={cn("font-normal px-8")}
+                    className={cn("font-normal flex gap-2")}
                     onClick={action}
                 >
+                    <Icons.add className="h-4 w-4 text-white" />
                     {buttonText}
                 </Button>
             </div>

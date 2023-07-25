@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/ui/icons";
 import Link from "next/link";
 import MainNav from "@/components/layout/main-nav";
 import UserAccountDropdown from "@/components/layout/user-account-dropdown";

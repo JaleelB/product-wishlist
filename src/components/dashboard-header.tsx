@@ -1,20 +1,14 @@
-"use client"
-import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
-import { Icons } from "./ui/icons";
-
 export default function DashboardHeader({
     title,
     description,
-    buttonText,
     segment,
-    action
+    actionComponent
 }:{
     title: string,
     description: string,
     buttonText: string,
     segment: string,
-    action: () => void
+    actionComponent?: React.ReactNode
 }){
 
     return (
@@ -36,13 +30,7 @@ export default function DashboardHeader({
                     <h1 className="text-2xl sm:text-3xl font-medium">{title}</h1>
                     <p className="text-muted-foreground text-sm sm:text-base max-w-md">{description}</p>
                 </div>
-                <Button 
-                    className={cn("font-normal flex gap-2")}
-                    onClick={action}
-                >
-                    <Icons.add className="h-4 w-4 text-white" />
-                    {buttonText}
-                </Button>
+                {actionComponent}
             </div>
         </header>
     )

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
+"use client"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -6,6 +7,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -17,18 +19,14 @@ import { createWishlist } from "@/app/_actions/wishlist-actions"
 import { toast } from "./ui/use-toast"
 import { Icons } from "./ui/icons"
 import React from "react"
-
+import { cn } from "@/lib/utils"
 
 type FormData = z.infer<typeof wishlistSchema>
 
 export default function CreateWishlistDialog({
-    open,
-    onClose,
     pathname,
     userId,
 }:{
-    open: boolean, 
-    onClose: () => void,
     pathname: string,
     userId: string
 }) {
@@ -41,47 +39,56 @@ export default function CreateWishlistDialog({
         resolver: zodResolver(wishlistSchema)
     });
     
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [isWishlistOpen, setIsWishlistOpen] = React.useState<boolean>(false);
+    const [isPending, startTransition] = React.useTransition();
 
-    async function onSubmit(data: FormData){
-
-        setIsLoading(true);
+    function onSubmit(data: FormData){
         
-        try{
-            const wishList = await createWishlist({
-                name: data.name,
-                userId: userId,
-                path: pathname,
-            })
+        startTransition(async () => {
+        
+            try{
+                const wishList = await createWishlist({
+                    name: data.name,
+                    userId: userId,
+                    path: pathname,
+                })
 
-            setIsLoading(false);
+                if(!wishList) throw new Error('Wishlist could not be created.');
 
-            if(!wishList) throw new Error('Wishlist could not be created.');
-
-            onClose();
-            toast({
-                title: "All done!",
-                description: "Your wishlist was successfully created.",
-            })
-  
-        }catch(err){
-            toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: "Your wishlist could not be created.",
-            })
-        }
+                setIsWishlistOpen(false);
+                toast({
+                    title: "All done!",
+                    description: "Your wishlist was successfully created.",
+                })
+    
+            }catch(err){
+                toast({
+                    variant: "destructive",
+                    title: "Uh oh! Something went wrong.",
+                    description: "Your wishlist could not be created.",
+                })
+            }
+        })
 
     }
 
     return (
-        <Dialog open={open}>
+        <Dialog open={isWishlistOpen}>
+            <DialogTrigger asChild>
+                <Button 
+                    className={cn("font-normal flex gap-2")}
+                    onClick={()=> setIsWishlistOpen(true)}
+                >
+                    <Icons.add className="h-4 w-4 text-white" />
+                    Create Wishlists
+                </Button>
+            </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                <DialogTitle>New Wishlist</DialogTitle>
-                <DialogDescription>
-                    Create your product wishlist here. Click save when you&nbsp;re done.
-                </DialogDescription>
+                    <DialogTitle>New Wishlist</DialogTitle>
+                    <DialogDescription>
+                        Create your product wishlist here. Click save when you&nbsp;re done.
+                    </DialogDescription>
                 </DialogHeader>
                 <form className="grid gap-4 py-4" onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-2 mb-4">
@@ -92,17 +99,17 @@ export default function CreateWishlistDialog({
                             id="name"
                             placeholder="Add a descriptive name.."
                             className='w-full'
-                            disabled={isLoading}
+                            disabled={isPending}
                         />
                         {errors.name && typeof errors.name.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.name.message}</p>}
                     </div>
                     <Button type="submit">
-                        { isLoading && <Icons.spinner className="animate-spin h-4 w-4 text-white mr-2" />}
+                        { isPending && <Icons.spinner className="animate-spin h-4 w-4 text-white mr-2" />}
                         Add wishlist
                     </Button>
                 </form>
                 <Button 
-                    onClick={onClose} 
+                    onClick={()=> setIsWishlistOpen(false)} 
                     variant="outline" 
                     className="-mt-6"
                 >

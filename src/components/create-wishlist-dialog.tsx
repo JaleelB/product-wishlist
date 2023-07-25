@@ -15,6 +15,9 @@ import { type z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createWishlist } from "@/app/_actions/wishlist-actions"
 import { toast } from "./ui/use-toast"
+import { Icons } from "./ui/icons"
+import React from "react"
+
 
 type FormData = z.infer<typeof wishlistSchema>
 
@@ -37,8 +40,12 @@ export default function CreateWishlistDialog({
     } = useForm<FormData>({
         resolver: zodResolver(wishlistSchema)
     });
+    
+    const [isLoading, setIsLoading] = React.useState(false);
 
     async function onSubmit(data: FormData){
+
+        setIsLoading(true);
         
         try{
             const wishList = await createWishlist({
@@ -47,10 +54,11 @@ export default function CreateWishlistDialog({
                 path: pathname,
             })
 
+            setIsLoading(false);
+
             if(!wishList) throw new Error('Wishlist could not be created.');
 
             onClose();
-            
             toast({
                 title: "All done!",
                 description: "Your wishlist was successfully created.",
@@ -84,10 +92,14 @@ export default function CreateWishlistDialog({
                             id="name"
                             placeholder="Add a descriptive name.."
                             className='w-full'
+                            disabled={isLoading}
                         />
                         {errors.name && typeof errors.name.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.name.message}</p>}
                     </div>
-                    <Button type="submit">Add wishlist</Button>
+                    <Button type="submit">
+                        { isLoading && <Icons.spinner className="animate-spin h-4 w-4 text-white mr-2" />}
+                        Add wishlist
+                    </Button>
                 </form>
                 <Button 
                     onClick={onClose} 

@@ -7,6 +7,7 @@ import UserAccountDropdown from "@/components/layout/user-account-dropdown";
 import { SideNavigation } from "@/components/layout/side-nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { createUser, getUser } from "../_actions/user-actions";
 
 
 export default async function HomeLayout({
@@ -17,6 +18,16 @@ export default async function HomeLayout({
 
     const user = await currentUser();
     if(!user) redirect('/sign-in')
+
+    const existingUser = await getUser(user.id);
+    if(!existingUser){
+        await createUser({
+            username: `${user?.firstName} ${user?.lastName}`,
+            email: user.emailAddresses[0]?.emailAddress ?? "",
+            id: user.id,
+        })
+    }
+    
 
     return (
         <div className="flex w-screen h-screen flex-col">

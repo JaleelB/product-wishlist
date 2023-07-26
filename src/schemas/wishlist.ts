@@ -6,8 +6,9 @@ export const createWishlistSchema = z.object({
 });
 
 export const updateWishlistSchema = z.object({
-    name: z.string().nonempty().optional(),
-    description: z.string().nonempty().optional(),
-}).refine(data => data.name ?? data.description, {
+    name: z.string().optional(),
+    description: z.string().optional(),
+// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+}).refine(data => data.name?.trim() !== "" || data.description?.trim() !=="", {
     message: "At least one of name or description must be provided",
 });

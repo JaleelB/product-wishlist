@@ -9,12 +9,45 @@ import {
     CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import React from "react"
+import { getUserWishlists } from "@/app/_actions/wishlist-actions"
+import { useUser } from "@clerk/nextjs"
+import WishlistNavItem from "../wishlist-nav-link"
+import { type Wishlist } from "@prisma/client"
   
 
 export function SideNavigation() {
 
     const [isOpen, setIsOpen] = React.useState(false)
     const pathname = usePathname()
+    const { user } = useUser();
+    
+    const [wishlists, setWishlists] = React.useState<Wishlist[]>([]);
+
+    React.useEffect(() => {
+        async function fetchWishlists(){
+            if(!user?.id) return;
+            const wishlists = await getUserWishlists({
+                id: user?.id ?? '',
+                path: pathname,
+            });
+            setWishlists(wishlists);
+        };
+
+        void fetchWishlists();
+    }, [user?.id, pathname]);
+
+    const renderedWishlists = React.useMemo(() => {
+        return wishlists.map((wishlist: Wishlist) => {
+            return (
+                <WishlistNavItem
+                    key={wishlist.id}
+                    path={pathname}
+                    title={wishlist.title}
+                    wishlistId={wishlist.id}
+                />
+            )
+        })
+    }, [wishlists, pathname]);
 
     return (
         <div className="w-full pr-4 py-6 lg:py-8 text-sm overflow-y-auto">
@@ -28,12 +61,16 @@ export function SideNavigation() {
                 onOpenChange={setIsOpen}
                 className={cn("mt-5")}
             >
-                <CollapsibleTrigger className={cn("w-full text-muted-foreground hover:bg-accent rounded-md font-semibold py-2 px-4 mb-1 inline-flex justify-between")}>
-                    Wishlists
+                <CollapsibleTrigger className={cn("w-full text-muted-foreground hover:bg-accent rounded-md font-semibold py-2 px-4 inline-flex justify-between")}>
+                    <div className="inline-flex gap-2">
+                        <Icons.list className={cn("h-5 w-5")} />
+                        Wishlists 
+                    </div>
+                    
                     <Icons.chevronRight className={cn(`h-5 w-5 ml-auto transition ${isOpen && 'rotate-90' }`)} />
                 </CollapsibleTrigger>
-                <CollapsibleContent className={cn("pl-4 mt-2 text-muted-foreground transition")}>
-                    <span className="text-zinc-400 font-normal">No wishlists inside</span>
+                <CollapsibleContent className={cn("mt-2 ml-4 text-muted-foreground transition")}>
+                    {renderedWishlists.length > 0 ? renderedWishlists : <div className="font-normal">No wishlists inside</div>}
                 </CollapsibleContent>
             </Collapsible>
         </div>

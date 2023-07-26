@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { wishlistSchema } from "@/schemas/wishlist"
+import { createWishlistSchema } from "@/schemas/wishlist"
 import { useForm } from "react-hook-form"
 import { type z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,7 +21,7 @@ import { Icons } from "./ui/icons"
 import React from "react"
 import { cn } from "@/lib/utils"
 
-type FormData = z.infer<typeof wishlistSchema>
+type FormData = z.infer<typeof createWishlistSchema>
 
 export default function CreateWishlistDialog({
     pathname,
@@ -36,7 +36,7 @@ export default function CreateWishlistDialog({
         handleSubmit, 
         formState: { errors } 
     } = useForm<FormData>({
-        resolver: zodResolver(wishlistSchema)
+        resolver: zodResolver(createWishlistSchema)
     });
     
     const [isWishlistOpen, setIsWishlistOpen] = React.useState<boolean>(false);
@@ -51,6 +51,7 @@ export default function CreateWishlistDialog({
                     name: data.name,
                     userId: userId,
                     path: pathname,
+                    description: data.description,
                 })
 
                 if(!wishList) throw new Error('Wishlist could not be created.');
@@ -73,7 +74,7 @@ export default function CreateWishlistDialog({
     }
 
     return (
-        <Dialog open={isWishlistOpen}>
+        <Dialog open={isWishlistOpen} onOpenChange={setIsWishlistOpen}>
             <DialogTrigger asChild>
                 <Button 
                     className={cn("font-normal flex gap-2")}
@@ -91,7 +92,7 @@ export default function CreateWishlistDialog({
                     </DialogDescription>
                 </DialogHeader>
                 <form className="grid gap-4 py-4" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="space-y-2 mb-4">
+                    <div className="space-y-2">
                         <Label htmlFor="name" className="text-right">Wishlist Name</Label>
                         <Input 
                             {...register('name')}
@@ -102,6 +103,18 @@ export default function CreateWishlistDialog({
                             disabled={isPending}
                         />
                         {errors.name && typeof errors.name.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.name.message}</p>}
+                    </div>
+                    <div className="space-y-2 mb-4">
+                        <Label htmlFor="description" className="text-right">Wishlist Description</Label>
+                        <Input 
+                            {...register('description')}
+                            type="text" 
+                            id="descripition"
+                            placeholder="Add a description.."
+                            className='w-full'
+                            disabled={isPending}
+                        />
+                        {errors.description && typeof errors.description.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.description.message}</p>}
                     </div>
                     <Button type="submit">
                         { isPending && <Icons.spinner className="animate-spin h-4 w-4 text-white mr-2" />}

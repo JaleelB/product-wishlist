@@ -21,7 +21,7 @@ model Wishlist {
   title      String
   userId     String
   description String
-  user       User        @relation(fields: [userId], references: [id])
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   products   Product[]
 }
 
@@ -32,5 +32,5 @@ model Product {
   imageUrl    String
   description String
   wishlistId  String
-  wishlist    Wishlist    @relation(fields: [wishlistId], references: [id])
+  wishlist    Wishlist    @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
 }

@@ -17,7 +17,7 @@ export default async function DashboardHome(){
     const emptyItems = wishlists.length > maxItemsPerRow ? 0 : maxItemsPerRow - wishlists.length;
 
     return (
-        <section className="py-6 lg:pl-8 lg:py-8 w-full flex flex-col gap-8 overflow-y-auto">
+        <section className="py-6 lg:pl-8 lg:py-8 w-full h-full flex flex-col gap-8 overflow-y-auto">
             <DashboardHeader
                 title="Product Wishlist"
                 description="Welcome to your Wishlist Dashboard! Here, you can manage all your product wishlists at a glance."
@@ -30,11 +30,21 @@ export default async function DashboardHome(){
                     />
                 }
             />
-            <div className="w-full h-full flex flex-col gap-4">
+            <div className="w-full h-full relative">
                 {
                     wishlists.length === 0 ?
                     (
-                        <EmptyState/>
+                        <div className="absolute left-1/2 top-1/2 w-fit h-fit -translate-x-1/2 -translate-y-1/2">
+                          <EmptyState
+                                message="You don't have any wishlists yet!"
+                                actionComponent={
+                                    <CreateWishlistDialog
+                                        pathname={"/home"}
+                                        userId={user?.id ?? ''}
+                                    />
+                                }
+                          />  
+                        </div>
                     ):(
                         <div>
                             <div className="mt-4 wishlist-grid pt-4 pb-[180px]">

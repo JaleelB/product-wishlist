@@ -20,7 +20,6 @@ export function SideNavigation() {
     const [isOpen, setIsOpen] = React.useState(false)
     const pathname = usePathname()
     const { user } = useUser();
-    
     const [wishlists, setWishlists] = React.useState<Wishlist[]>([]);
 
     React.useEffect(() => {

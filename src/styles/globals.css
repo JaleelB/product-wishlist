@@ -66,6 +66,19 @@
  
     --ring: 240 3.7% 15.9%; 
   }
+
+  .wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    gap: 1rem;
+    position: relative;
+  }
+
+  @media (min-width: 480px) {
+      .wishlist-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+  }
   
 }
  

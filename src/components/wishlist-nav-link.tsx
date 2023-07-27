@@ -14,12 +14,12 @@ export default function WishlistNavItem({
 }){
     return (
         <Link 
-            href={path}
+            href={`/wishlist/${wishlistId}`}
             className={cn("flex items-center justify-between w-full h-full group gap-2 text-muted-foreground hover:bg-accent rounded-md font-semibold py-1.5 px-4")}
         >
             <div className="inline-flex gap-2 items-center">
                 <Icons.hash className={cn("h-4 w-4")} />
-                <h4 className="text-sm font-normal">{title}</h4>
+                <h4 className="text-sm font-normal line-clamp-1 group-hover:text-clip">{title}</h4>
             </div>
             <WishlistOperations
                 wishlistId={wishlistId}

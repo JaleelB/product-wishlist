@@ -1,8 +1,8 @@
-import { type Wishlist } from "@prisma/client";
+import { type WishlistWithProducts } from "@/types";
 import Link from "next/link";
 
-export default function WishlistItem({wishlist}) {
-    console.log(wishlist)
+export default function WishlistItem({wishlist}:{wishlist: WishlistWithProducts}) {
+    
     const angle = Math.floor(Math.random() * 360);
 
     return (

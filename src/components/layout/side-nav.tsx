@@ -29,24 +29,13 @@ export function SideNavigation() {
                 id: user?.id ?? '',
                 path: pathname,
             });
-            setWishlists(wishlists);
+            if (wishlists) {
+                setWishlists(wishlists);
+            }
         };
-
+    
         void fetchWishlists();
     }, [user?.id, pathname]);
-
-    const renderedWishlists = React.useMemo(() => {
-        return wishlists.map((wishlist: Wishlist) => {
-            return (
-                <WishlistNavItem
-                    key={wishlist.id}
-                    path={pathname}
-                    title={wishlist.title}
-                    wishlistId={wishlist.id}
-                />
-            )
-        })
-    }, [wishlists, pathname]);
 
     return (
         <div className="w-full pr-4 py-6 lg:py-8 text-sm overflow-y-auto">
@@ -69,7 +58,18 @@ export function SideNavigation() {
                     <Icons.chevronRight className={cn(`h-5 w-5 ml-auto transition ${isOpen && 'rotate-90' }`)} />
                 </CollapsibleTrigger>
                 <CollapsibleContent className={cn("mt-2 ml-4 text-muted-foreground transition")}>
-                    {renderedWishlists.length > 0 ? renderedWishlists : <div className="font-normal">No wishlists inside</div>}
+                    {
+                        wishlists.map((wishlist: Wishlist) => {
+                            return (
+                                <WishlistNavItem
+                                    key={wishlist.id}
+                                    path={pathname}
+                                    title={wishlist.title}
+                                    wishlistId={wishlist.id}
+                                />
+                            )
+                        })
+                    }
                 </CollapsibleContent>
             </Collapsible>
         </div>

@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `Product` MODIFY `url` VARCHAR(1000) NOT NULL,
+    MODIFY `imageUrl` VARCHAR(1000) NOT NULL,
+    MODIFY `description` VARCHAR(1000) NOT NULL;

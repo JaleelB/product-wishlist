@@ -26,11 +26,11 @@ model Wishlist {
 }
 
 model Product {
-  id          String         @id
+  id          String         @id @default(uuid())
   name        String
-  url         String
-  imageUrl    String
-  description String
+  url         String         @db.VarChar(1000)
+  imageUrl    String         @db.VarChar(1000)
+  description String         @db.VarChar(1000)
   wishlistId  String
   wishlist    Wishlist    @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
 }

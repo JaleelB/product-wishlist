@@ -15,3 +15,11 @@ export interface AuthUser {
 export interface WishlistWithProducts extends Wishlist {
   products: Product[];
 }
+
+export interface Metadata {
+  title: string;
+  url: string;
+  image: string;
+  description: string;
+  isProduct?: boolean;
+}

@@ -78,9 +78,10 @@ export default function CreateProdcuctDialog({
                 <Button 
                     className={cn("font-normal flex gap-2")}
                     onClick={()=> setIsProductDialogOpen(true)}
+                    disabled={isPending}
                 >
                     <Icons.add className="h-4 w-4 text-white" />
-                    Create Product
+                    Create a Product
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
@@ -103,7 +104,10 @@ export default function CreateProdcuctDialog({
                         />
                         {errors.url && typeof errors.url.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.url.message}</p>}
                     </div>
-                    <Button type="submit">
+                    <Button 
+                        type="submit"
+                        disabled={isPending}
+                    >
                         { isPending && <Icons.spinner className="animate-spin h-4 w-4 text-white mr-2" />}
                         Add Product
                     </Button>
@@ -112,6 +116,7 @@ export default function CreateProdcuctDialog({
                     onClick={()=> setIsProductDialogOpen(false)} 
                     variant="outline" 
                     className="-mt-6"
+                    disabled={isPending}
                 >
                     Cancel
                 </Button>

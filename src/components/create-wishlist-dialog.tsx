@@ -79,6 +79,7 @@ export default function CreateWishlistDialog({
                 <Button 
                     className={cn("font-normal flex gap-2")}
                     onClick={()=> setIsWishlistOpen(true)}
+                    disabled={isPending}
                 >
                     <Icons.add className="h-4 w-4 text-white" />
                     Create Wishlists
@@ -116,7 +117,10 @@ export default function CreateWishlistDialog({
                         />
                         {errors.description && typeof errors.description.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.description.message}</p>}
                     </div>
-                    <Button type="submit">
+                    <Button 
+                        type="submit"
+                        disabled={isPending}
+                    >
                         { isPending && <Icons.spinner className="animate-spin h-4 w-4 text-white mr-2" />}
                         Add wishlist
                     </Button>
@@ -125,6 +129,7 @@ export default function CreateWishlistDialog({
                     onClick={()=> setIsWishlistOpen(false)} 
                     variant="outline" 
                     className="-mt-6"
+                    disabled={isPending}
                 >
                     Cancel
                 </Button>

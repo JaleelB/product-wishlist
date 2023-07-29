@@ -9,7 +9,9 @@ import { isMetaProduct } from './meta-isproduct';
 
 export const getMetadata = async (url: string): Promise<Metadata> => {
 
-  const response = await fetch(url);
+  const response = await fetch(url,{
+    cache: "no-cache",
+  });
   const html = await response.text();
 
   return {

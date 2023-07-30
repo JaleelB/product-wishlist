@@ -57,3 +57,38 @@ export async function createProduct({
         return null;
     }
 }
+
+export async function deleteProduct({
+    wishlistId,
+    productId,
+    path,
+}: {
+    wishlistId: string;
+    productId: string;
+    path: string;
+}) {
+    try {
+        
+        const product = await prisma.product.findFirst({
+            where: {
+                id: productId,
+                wishlistId: wishlistId,
+            }
+        });
+
+        if (!product) throw new Error('Product does not exist');
+
+        await prisma.product.delete({
+            where: {
+                id: product.id,
+            }
+        });
+
+        revalidatePath(path);
+        return { success: true };
+
+    } catch (err) {
+        console.error('Error deleting product:', err);
+        return null;
+    }
+}

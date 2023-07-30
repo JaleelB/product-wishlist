@@ -68,7 +68,7 @@ export default async function WishlistPage({ params }: { params: { slug: string 
                                 {
                                     products.map((product: Product) => {
                                         return (
-                                            <ProductItem key={product.id} product={product} />
+                                            <ProductItem key={product.id} product={product} path={`/wishlist/${params.slug}`} />
                                         )
                                     })
                                 }

@@ -2,9 +2,15 @@
 import { type Product } from "@prisma/client";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Icons } from "./ui/icons";
+import ProductOperations from "./product-operations";
 
-export default function WishlistItem({product}:{product: Product}) {
+export default function WishlistItem({
+    product,
+    path
+}:{
+    product: Product,
+    path: string
+}) {
 
     return (
         <div className="w-full aspect-[1/.75] h-full flex flex-col gap-4 shadow-sm border rounded-md p-2.5" >
@@ -26,10 +32,11 @@ export default function WishlistItem({product}:{product: Product}) {
                         Visit Product
                     </Button>
                 </Link>
-                <Button size="icon" className="px-2" variant="outline">
-                    <Icons.ellipsis className="h-5 w-5 text-muted-foreground" />
-                </Button>
-                
+                <ProductOperations
+                    wishlistId={product.wishlistId}
+                    productId={product.id}
+                    path={path}
+                />
             </div>
             
         </div>

@@ -59,6 +59,7 @@ export function SideNavigation() {
                 </CollapsibleTrigger>
                 <CollapsibleContent className={cn("mt-2 ml-4 text-muted-foreground transition")}>
                     {
+                        wishlists.length !== 0 ?
                         wishlists.map((wishlist: Wishlist) => {
                             return (
                                 <WishlistNavItem
@@ -69,6 +70,8 @@ export function SideNavigation() {
                                 />
                             )
                         })
+                        :
+                        <div className="text-muted-foreground pl-4">No wishlists here.</div>
                     }
                 </CollapsibleContent>
             </Collapsible>

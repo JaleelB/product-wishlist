@@ -36,7 +36,7 @@ export default async function DashboardHome(){
                     (
                         <div className="absolute left-1/2 top-1/2 w-fit h-fit -translate-x-1/2 -translate-y-1/2">
                           <EmptyState
-                                message="You don't have any wishlists yet!"
+                                message="You haven't created have any wishlists yet"
                                 actionComponent={
                                     <CreateWishlistDialog
                                         pathname={"/home"}

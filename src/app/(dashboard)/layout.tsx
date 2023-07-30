@@ -57,7 +57,7 @@ export default async function HomeLayout({
                 <aside className="hidden w-[300px] flex-col lg:flex">
                     <SideNavigation/>
                 </aside>
-                <main className="flex w-full flex-1 flex-col overflow-hidden">
+                <main className="flex w-full flex-grow flex-col overflow-hidden">
                     {children}
                 </main>
             </div>

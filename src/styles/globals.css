@@ -67,7 +67,7 @@
     --ring: 240 3.7% 15.9%; 
   }
 
-  .wishlist-grid {
+  .wishlist-grid, .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     gap: 1rem;
@@ -75,9 +75,15 @@
   }
 
   @media (min-width: 480px) {
-      .wishlist-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      }
+    .wishlist-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+  }
+
+  @media (min-width: 480px) {
+    .product-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
   }
   
 }

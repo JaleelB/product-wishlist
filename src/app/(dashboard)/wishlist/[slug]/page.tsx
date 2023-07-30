@@ -37,7 +37,7 @@ export default async function WishlistPage({ params }: { params: { slug: string 
         <section className="py-6 lg:pl-8 lg:py-8 w-full h-full flex flex-col gap-8 overflow-y-auto">
             <DashboardHeader
                 title={wishlist?.title ?? ''}
-                description={!wishlist.description ? "View and organize you wishlist's products here." : wishlist.description as string}
+                description={(wishlist.description as string) || "View and organize you wishlist's products here."}
                 buttonText="Create a product"
                 segment={wishlist?.title ?? ''}
                 actionComponent={

@@ -6,10 +6,14 @@ import { prisma } from "@/server/db"
 import { type Product } from "@prisma/client";
 import { redirect } from "next/navigation";
 
+interface WishlistType {
+    title: string;
+    description: string;
+};
 
 export default async function WishlistPage({ params }: { params: { slug: string } }){
 
-    const wishlist = await prisma.wishlist.findUnique({
+    const wishlist: WishlistType | null = await prisma.wishlist.findUnique({
         where: {
           id: params.slug,
         },
@@ -32,12 +36,11 @@ export default async function WishlistPage({ params }: { params: { slug: string 
     const maxItemsPerRow = 4;
     const emptyItems = products.length > maxItemsPerRow ? 0 : maxItemsPerRow - products.length;
 
-
     return (
         <section className="py-6 lg:pl-8 lg:py-8 w-full h-full flex flex-col gap-8 overflow-y-auto">
             <DashboardHeader
                 title={wishlist?.title ?? ''}
-                description={(wishlist.description as string) || "View and organize you wishlist's products here."}
+                description={wishlist?.description || "View and organize you wishlist's products here."}
                 buttonText="Create a product"
                 segment={wishlist?.title ?? ''}
                 actionComponent={

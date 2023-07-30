@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -10,9 +11,11 @@ export default function Home() {
         Discover, save, and share the products you love, all in one place. Your 
         dream products are just a click away, organized and ready to be explored.
       </p>
-      <Button className="rounded-full h-[48px] w-[240px] gap-2">
-        Login to get started
-      </Button>
+      <Link href="/sign-in">
+        <Button className="rounded-full h-[48px] w-[240px] gap-2">
+          Login to get started
+        </Button>
+      </Link>
     </section>
   );
 }

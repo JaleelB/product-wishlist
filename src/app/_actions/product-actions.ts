@@ -25,9 +25,7 @@ export async function createProduct({
         
         const metadata: Metadata = await getMetadata(url)
 
-        console.log("metadata is product:", metadata.isProduct)
         if (!metadata.isProduct) throw new Error("This is not a product page");
-        
 
         const product = await prisma.product.findFirst({
             where: {

@@ -17,7 +17,7 @@ import { type Wishlist } from "@prisma/client"
 
 export function SideNavigation() {
 
-    const [isOpen, setIsOpen] = React.useState(false)
+    const [isOpen, setIsOpen] = React.useState(true)
     const pathname = usePathname()
     const { user } = useUser();
     const [wishlists, setWishlists] = React.useState<Wishlist[]>([]);
